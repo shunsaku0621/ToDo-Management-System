@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CreateController {
 	@GetMapping("/main/create")
-	public String adminPage() {
+	public String createIndex() {
 		return "create";
 	}
 }
