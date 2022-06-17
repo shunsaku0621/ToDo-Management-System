@@ -24,21 +24,36 @@ public class CreateController {
 	@Autowired
 	private TasksRepository tasksRepository;
 	
+//	@GetMapping("/main/create")
+//	public String createIndex(Model model) {
+//		List<Tasks> list = tasksRepository.findAll();
+////	    Collections.reverse(list); //普通に取得してこちらの処理でもOK
+//			model.addAttribute("create", list);
+////			TasksCreateForm tasksCreateForm = new TasksCreateForm();
+////			model.addAttribute("TasksCreateForm", tasksCreateForm);
+//		return "create";
+//	}
+	
 	@GetMapping("/main/create")
-	public String createIndex() {
+	public String getNewTask(Model model) {
+		// Modelに空のUserFormを追加
+		TasksCreateForm tasksCreateForm = new TasksCreateForm();
+		model.addAttribute("tasksCreateForm", tasksCreateForm);
+		// テンプレートは src/main/resources/templates/newuser.html とします。
 		return "create";
 	}
 	
 	
-	public String create(@Validated TasksCreateForm tasksCreateForm, BindingResult bindingResult,
+	
+	public String registerTasks(@Validated TasksCreateForm tasksCreateForm, BindingResult bindingResult,
 			@AuthenticationPrincipal AccountUserDetails user, Model model) {
 		// バリデーションの結果、エラーがあるかどうかチェック
 		if (bindingResult.hasErrors()) {
 			// エラーがある場合は投稿登録画面を返す
 			List<Tasks> list = tasksRepository.findAll();
-			model.addAttribute("tasks", list);
-			model.addAttribute("tasksCreateForm", tasksCreateForm);
-			return "/creates";
+			model.addAttribute("create", list);
+			model.addAttribute("TasksCreateForm", tasksCreateForm);
+			return "/create";
 		}
 
 		Tasks task = new Tasks();
