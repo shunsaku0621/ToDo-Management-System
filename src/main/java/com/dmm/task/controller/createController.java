@@ -33,8 +33,8 @@ public class CreateController {
 ////			model.addAttribute("TasksCreateForm", tasksCreateForm);
 //		return "create";
 //	}
-	
-	@GetMapping("/main/create")
+//	@PostMapping("/main/create/{date}")
+	@GetMapping("/main/create/{yyyy-MM-dd}")
 	public String getNewTask(Model model) {
 		// Modelに空のUserFormを追加
 		TasksCreateForm tasksCreateForm = new TasksCreateForm();
