@@ -41,7 +41,30 @@
       class="prevnext" href="javascript:form2.submit()">keyboard_arrow_right</a></span>
     </form>
    </div>
-
+   
+   
+   
+   
+   
+   <div class="test">
+   	<table>
+			<tr>
+				<th>ID</th>
+				<th>名前</th>
+				<th>Email</th>
+			</tr>
+			<tr th:each="task : ${tasks}">
+				<td th:text="${task.title}"></td>
+				<td th:text="${task.text}"></td>
+				<td th:text="${task.date}"></td>
+			</tr>
+		</table>
+   </div>
+   
+   
+   
+   
+   
    <div class="sd">
     <div class="calendar_row sd">
      <div class="calendar_box sd">
