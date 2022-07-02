@@ -1,10 +1,11 @@
 package com.dmm.task.form;
 
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
-
-
-
 
 
 
@@ -14,9 +15,8 @@ public class TasksCreateForm {
 //		@Size(min = 1, max = 200)
 		private String title;
 		
-//		@DateTimeFormat(pattern = "[yyyy-MM-dd]")
-//		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-		private String date;
+		@DateTimeFormat(pattern = "yyyy-MM-dd")
+		private LocalDate date;
 		private String text;
 		
 		
