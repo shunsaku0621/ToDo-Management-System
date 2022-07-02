@@ -34,15 +34,6 @@ public class MainController {
 		
 		List<List<LocalDate>> matrix = new ArrayList<>();
 		List<LocalDate> week = new ArrayList<>();
-//		
-//		if(task.get().getDate() == null) {
-//		    d = LocalDate.now();
-//		    d = LocalDate.of(d.getYear(), d.getMonthValue(), 1);
-//		  }else {
-//		    d = date;
-//		  }
-//		
-		
 		
 		LocalDate d1 = LocalDate.now().withDayOfMonth(1);
 		
@@ -52,15 +43,8 @@ public class MainController {
 		
 		d1 = startDate;
 		
-		
-		
 		for(int i = 0; i < 7; i++) {
 			week.add(d1);
-//			if(task.get(i).getDate() == d1) {
-//				params1.add(d1, task.get(i));
-//			} else {
-//				params1.add(d1, null);
-//			}
 			
 			for(int t = 0; t < task.size(); t++) {
 				if(task.get(t).getDate().isEqual(d1)) {
@@ -71,19 +55,10 @@ public class MainController {
 		}
 		matrix.add(week);
 		
-		
-		
-		
 		week  = new ArrayList<>();
 		for(int l = 0; l < d1.lengthOfMonth(); l++) {
 			DayOfWeek dw = d1.getDayOfWeek();
 			week.add(d1);
-			
-//			if(task.get(l).getDate() == d1) {
-//				params1.add(d1, task.get(l));
-//			} else {
-//				params1.add(d1, null);
-//			}
 			
 			for(int t = 0; t < task.size(); t++) {
 				if(task.get(t).getDate().isEqual(d1)) {
@@ -97,17 +72,7 @@ public class MainController {
 				matrix.add(week);
 				week = new ArrayList<>();
 			}
-			
 		}
-		
-		
-		
-		
-		System.out.println(task);
-		
-		System.out.println(matrix);
-		
-		System.out.println(params1);
 		
 		model.addAttribute("matrix", matrix);
 		model.addAttribute("tasks", params1);
