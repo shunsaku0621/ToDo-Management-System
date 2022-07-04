@@ -52,8 +52,6 @@ public class CreateController {
 //			model.addAttribute("TasksCreateForm", tasksCreateForm);
 //			return "/create";
 //		}
-		System.out.println("-----------------------TEST2-------------------------");
-		System.out.println(tasksCreateForm);
 		
 		
 		Tasks task = new Tasks();
