@@ -27,7 +27,7 @@ public class MainController {
 	@GetMapping("/main")
 	public String mainIndex(Model model) {
 		
-		MultiValueMap<LocalDate, Tasks> params1 = new LinkedMultiValueMap<LocalDate, Tasks>();
+		MultiValueMap<LocalDate, Tasks> toDoList = new LinkedMultiValueMap<LocalDate, Tasks>();
 		List<Tasks> task = tasksRepository.findAll();
 		
 		System.out.println("---------------------カレンダー表示機能------------------------");
@@ -48,7 +48,7 @@ public class MainController {
 			
 			for(int t = 0; t < task.size(); t++) {
 				if(task.get(t).getDate().isEqual(d1)) {
-					params1.add(d1,task.get(t));
+					toDoList.add(d1,task.get(t));
 				}
 			}
 			d1 = d1.plusDays(1);
@@ -62,7 +62,7 @@ public class MainController {
 			
 			for(int t = 0; t < task.size(); t++) {
 				if(task.get(t).getDate().isEqual(d1)) {
-					params1.add(d1,task.get(t));
+					toDoList.add(d1,task.get(t));
 				}
 			}
 			
@@ -75,7 +75,7 @@ public class MainController {
 		}
 		
 		model.addAttribute("matrix", matrix);
-		model.addAttribute("tasks", params1);
+		model.addAttribute("tasks", toDoList);
 		
 		return "main";
 	}
