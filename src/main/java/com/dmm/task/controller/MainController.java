@@ -29,11 +29,9 @@ public class MainController {
 		
 		MultiValueMap<LocalDate, Tasks> toDoList = new LinkedMultiValueMap<LocalDate, Tasks>();
 		List<Tasks> task = tasksRepository.findAll();
-		
-		System.out.println("---------------------カレンダー表示機能------------------------");
-		
 		List<List<LocalDate>> matrix = new ArrayList<>();
 		List<LocalDate> week = new ArrayList<>();
+		
 		
 		LocalDate d1 = LocalDate.now().withDayOfMonth(1);
 		
