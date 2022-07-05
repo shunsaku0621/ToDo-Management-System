@@ -22,37 +22,20 @@ public class CreateController {
 	@Autowired
 	private TasksRepository tasksRepository;
 	
-//	@GetMapping("/main/create")
-//	public String createIndex(Model model) {
-//		List<Tasks> list = tasksRepository.findAll();
-////	    Collections.reverse(list); //普通に取得してこちらの処理でもOK
-//			model.addAttribute("create", list);
-////			TasksCreateForm tasksCreateForm = new TasksCreateForm();
-////			model.addAttribute("TasksCreateForm", tasksCreateForm);
-//		return "create";
-//	}
-//	@PostMapping("/main/create/{yyyy-MM-dd}")
 	@GetMapping("/main/create/{yyyy-MM-dd}")
 	public String getNewTask(Model model) {
 		// Modelに空のUserFormを追加
 		TasksCreateForm tasksCreateForm = new TasksCreateForm();
 		model.addAttribute("tasksCreateForm", tasksCreateForm);
 		// テンプレートは src/main/resources/templates/newuser.html とします。
+		System.out.println("日付入のcreate");
 		return "create";
 	}
 	
 	
 	@PostMapping("/main/create")
 	public String registerTasks(TasksCreateForm tasksCreateForm, BindingResult bindingResult, @AuthenticationPrincipal AccountUserDetails user) {
-		// バリデーションの結果、エラーがあるかどうかチェック
-//		if (bindingResult.hasErrors()) {
-//			// エラーがある場合は投稿登録画面を返す
-//			List<Tasks> list = tasksRepository.findAll();
-//			model.addAttribute("create", list);
-//			model.addAttribute("TasksCreateForm", tasksCreateForm);
-//			return "/create";
-//		}
-		
+		System.out.println("普通のcreate");
 		
 		Tasks task = new Tasks();
 		task.setName(user.getName());
