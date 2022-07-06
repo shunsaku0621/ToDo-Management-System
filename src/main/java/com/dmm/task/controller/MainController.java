@@ -1,9 +1,11 @@
 package com.dmm.task.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +76,15 @@ public class MainController {
 		
 		model.addAttribute("matrix", matrix);
 		model.addAttribute("tasks", toDoList);
-		
+
+		//カレンダーを生成
+        Calendar cal = Calendar.getInstance();
+        //フォーマットを設定して出力
+        SimpleDateFormat sdf = new SimpleDateFormat("y年M月");
+ 
+		model.addAttribute("month", sdf.format(cal.getTime()));
+       
+ 
 		return "main";
 	}
 }
