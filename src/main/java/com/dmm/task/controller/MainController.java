@@ -1,11 +1,10 @@
 package com.dmm.task.controller;
 
 
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dmm.task.data.entity.Tasks;
 import com.dmm.task.data.repository.TasksRepository;
@@ -27,15 +27,42 @@ public class MainController {
 	
 	
 	@GetMapping("/main")
-	public String mainIndex(Model model) {
+	public String mainIndex(Model model, @RequestParam(name = "date", defaultValue = "") String date) {
 		
 		MultiValueMap<LocalDate, Tasks> toDoList = new LinkedMultiValueMap<LocalDate, Tasks>();
 		List<Tasks> task = tasksRepository.findAll();
 		List<List<LocalDate>> matrix = new ArrayList<>();
 		List<LocalDate> week = new ArrayList<>();
 		
+		System.out.println("TEST1");		
+		System.out.println(date);
 		
 		LocalDate d1 = LocalDate.now().withDayOfMonth(1);
+		
+		model.addAttribute("prev", d1.minusMonths(1));
+		model.addAttribute("next", d1.plusMonths(1));
+		
+		
+		
+//		System.out.println(d1.minusMonths(1));
+//		System.out.println(d1.plusMonths(1));
+//		
+		if(date.equals(d1.plusMonths(1).toString())) {
+			d1 = d1.plusMonths(1);
+		} else if(date.equals(d1.minusMonths(1).toString())){
+			d1 = d1.minusMonths(1);
+		}
+		
+		
+		DateTimeFormatter date2 = DateTimeFormatter.ofPattern("yyyy年M月");
+		String stringDate2 = d1.format(date2);
+		System.out.println("TEST2");
+		System.out.println(stringDate2);
+	
+		model.addAttribute("month", stringDate2);
+       
+		
+		
 		
 		DayOfWeek w = d1.getDayOfWeek(); 
 
@@ -77,14 +104,12 @@ public class MainController {
 		model.addAttribute("matrix", matrix);
 		model.addAttribute("tasks", toDoList);
 
-		//カレンダーを生成
-        Calendar cal = Calendar.getInstance();
-        //フォーマットを設定して出力
-        SimpleDateFormat sdf = new SimpleDateFormat("y年M月");
- 
-		model.addAttribute("month", sdf.format(cal.getTime()));
-       
- 
+		
+		
 		return "main";
 	}
+	
+	
+	
+	
 }
