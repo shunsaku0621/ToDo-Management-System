@@ -37,32 +37,33 @@ public class MainController {
 		System.out.println("TEST1");		
 		System.out.println(date);
 		
+		LocalDate local_date = LocalDate.parse(date);
 		LocalDate d1 = LocalDate.now().withDayOfMonth(1);
 		
-		model.addAttribute("prev", d1.minusMonths(1));
-		model.addAttribute("next", d1.plusMonths(1));
-		
-		
-		
-//		System.out.println(d1.minusMonths(1));
-//		System.out.println(d1.plusMonths(1));
-//		
-		if(date.equals(d1.plusMonths(1).toString())) {
-			d1 = d1.plusMonths(1);
-		} else if(date.equals(d1.minusMonths(1).toString())){
-			d1 = d1.minusMonths(1);
+		if(date == "") {
+			model.addAttribute("prev", d1.minusMonths(1));
+			model.addAttribute("next", d1.plusMonths(1));
+		}else {
+			model.addAttribute("prev", local_date.minusMonths(1));
+			model.addAttribute("next", local_date.plusMonths(1));
 		}
 		
 		
+		
+		if(date != "") {
+			d1 = local_date;
+		}
+		
+		
+		
+		
+		System.out.println("TEST2");
+		System.out.println(d1);
+		
 		DateTimeFormatter date2 = DateTimeFormatter.ofPattern("yyyy年M月");
 		String stringDate2 = d1.format(date2);
-		System.out.println("TEST2");
-		System.out.println(stringDate2);
 	
 		model.addAttribute("month", stringDate2);
-       
-		
-		
 		
 		DayOfWeek w = d1.getDayOfWeek(); 
 
