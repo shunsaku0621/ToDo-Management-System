@@ -34,13 +34,18 @@ public class MainController {
 		List<List<LocalDate>> matrix = new ArrayList<>();
 		List<LocalDate> week = new ArrayList<>();
 		
-		System.out.println("TEST1");		
-		System.out.println(date);
+		LocalDate local_date;
 		
-		LocalDate local_date = LocalDate.parse(date);
+		
 		LocalDate d1 = LocalDate.now().withDayOfMonth(1);
 		
-		if(date == "") {
+		if(date.isEmpty()) {
+			local_date = d1;
+		} else {
+			local_date = LocalDate.parse(date);
+		}
+		
+		if(date.isEmpty()) {
 			model.addAttribute("prev", d1.minusMonths(1));
 			model.addAttribute("next", d1.plusMonths(1));
 		}else {
@@ -48,17 +53,9 @@ public class MainController {
 			model.addAttribute("next", local_date.plusMonths(1));
 		}
 		
-		
-		
 		if(date != "") {
 			d1 = local_date;
 		}
-		
-		
-		
-		
-		System.out.println("TEST2");
-		System.out.println(d1);
 		
 		DateTimeFormatter date2 = DateTimeFormatter.ofPattern("yyyy年M月");
 		String stringDate2 = d1.format(date2);
@@ -104,13 +101,8 @@ public class MainController {
 		
 		model.addAttribute("matrix", matrix);
 		model.addAttribute("tasks", toDoList);
-
-		
 		
 		return "main";
 	}
-	
-	
-	
 	
 }
