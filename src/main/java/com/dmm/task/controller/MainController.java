@@ -98,7 +98,6 @@ public class MainController {
 				week = new ArrayList<>();
 			}
 		}
-		
 		model.addAttribute("matrix", matrix);
 		model.addAttribute("tasks", toDoList);
 		
