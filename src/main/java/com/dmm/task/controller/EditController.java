@@ -44,7 +44,6 @@ public class EditController {
 		task.setText(tasksEditForm.getText());
 		task.setDate(tasksEditForm.getDate());
 		task.setDone(tasksEditForm.isDone());
-
 		tasksRepository.save(task);
 		
 		return "redirect:/main";
